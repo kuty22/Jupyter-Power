@@ -1,5 +1,4 @@
-#  Containerization of Talend/Airflow
-
+#  Fun tricks about Jupyter
 
 __summary__:
 
