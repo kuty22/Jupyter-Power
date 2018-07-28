@@ -6,10 +6,8 @@ RM=rm -rf
 NAME_ERROR_MSG="Error service must be precise(eg. make exec service=<CONTAINER_NAME>)"
 service=
 
-# down build and start
-all: down_build_up
+all: .user.config.yml down_build_up
 
-### basic make ###
 down_build_up: down build up
 
 buid_up: build up
@@ -23,16 +21,21 @@ up:
 down:
 	$(DC) $(DOWN)
 
-### utils ###
+clean:
+	$(DC) $(DOWN) --volumes
+
 ps:
 	$(DC) ps
 
 logs:
 	$(DC) logs -f
 
-exec:
-ifndef service
-	@echo $(NAME_ERROR_MSG)
-	@exit 1
-endif
-	$(DC) exec $(service) bash
+.user.config.yml:
+		@echo 'version: "2"'            > $@
+		@echo 'services:'               >> $@
+		@echo '  user_services:'        >> $@
+		@echo '    build:'              >> $@
+		@echo '      context: src/'     >> $@
+		@echo '      args:'			        >> $@
+		@echo '        UID: '$(shell id -u)   >> $@
+		@echo '    user: "'$(shell id -u)'"'  >> $@

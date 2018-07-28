@@ -1,0 +1,7 @@
+name: conda_env
+channels:
+- defaults
+dependencies:
+- pip:
+  - jupyterlab
+prefix: /code

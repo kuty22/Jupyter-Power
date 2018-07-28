@@ -1,5 +1,14 @@
-version: "3"
+version: "2"
 services:
-
+  jupyter:
+    extends:
+      file: .user.config.yml
+      service: user_services
+    command: jupyter-lab --ip=0.0.0.0 --port=8888    --NotebookApp.token='' --NotebookApp.iopub_data_rate_limit=20000000 --NotebookApp.notebook_dir='/code'
+    volumes:
+      - ./src/:/code
+      - ./datasets:/datasets
+    ports:
+      - 8881:8888
 volumes:
   data:
