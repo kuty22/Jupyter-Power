@@ -14,6 +14,6 @@ RUN set -xe; \
     pip install --upgrade pip;\
     pip install -r /code/requirements.txt; \
     useradd -u ${UID} -g 0 -d /code default; \
-    chown -R ${UID}:0 /code; \
+    chown -R ${UID}:0 /code;
 
 USER 1001
